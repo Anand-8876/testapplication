@@ -69,7 +69,6 @@
 </head>
 <body class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 flex flex-col items-center justify-center relative">
 
-    <!-- Header -->
     <div class="absolute top-10 text-center px-4 z-10">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2"> YE NECCHE BUTTON HAI INHE DABA </h1>
         <p class="text-gray-600 text-sm md:text-base max-w-xs mx-auto">
@@ -77,10 +76,8 @@
         </p>
     </div>
 
-    <!-- Main Button Container -->
     <div class="flex flex-col gap-6 w-full max-w-xs px-6 z-20">
         
-        <!-- Love Button -->
         <button id="loveBtn" onclick="createParticles('love', this)" 
             class="group relative flex items-center justify-between p-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transform transition-all active:scale-95 border border-rose-100 cursor-pointer">
             <div class="p-3 rounded-full bg-rose-500 shadow-md group-hover:scale-110 transition-transform duration-300 text-white">
@@ -89,7 +86,6 @@
             <span class="text-lg font-semibold text-gray-700 flex-grow text-right pr-2"> DABAO AND JADDU DEKH</span>
         </button>
 
-        <!-- Food Button -->
         <button id="foodBtn" onclick="createParticles('food', this)" 
             class="group relative flex items-center justify-between p-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transform transition-all active:scale-95 border border-orange-100 cursor-pointer">
             <div class="p-3 rounded-full bg-orange-500 shadow-md group-hover:scale-110 transition-transform duration-300 text-white">
@@ -98,7 +94,7 @@
             <span class="text-lg font-semibold text-gray-700 flex-grow text-right pr-2">CHATORI KAHI KI</span>
         </button>
 
-        <!-- Jewellery Button -->
+        
         <button id="jewelleryBtn" onclick="createParticles('jewellery', this)" 
             class="group relative flex items-center justify-between p-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transform transition-all active:scale-95 border border-yellow-100 cursor-pointer">
             <div class="p-3 rounded-full bg-yellow-500 shadow-md group-hover:scale-110 transition-transform duration-300 text-white">
@@ -108,16 +104,14 @@
         </button>
     </div>
 
-    <!-- Footer Note -->
+
     <div class="absolute bottom-8 text-center text-gray-400 text-xs px-4 z-10">
         <p>khush hoja chal for you me will do anything </p>
     </div>
 
-    <!-- Container for particles -->
     <div id="particle-container" class="pointer-events-none fixed inset-0 overflow-hidden z-50"></div>
 
     <script>
-        // Configuration with Beautiful Icons
         const interactions = {
             love: {
                 icons: ['fa-heart', 'fa-rose', 'fa-face-heart-eyes', 'fa-hands-heart'],
@@ -137,22 +131,19 @@
         const container = document.getElementById('particle-container');
 
         function createParticles(type, button) {
-            const count = 15; // Particles per click
+            const count = 15; 
             const config = interactions[type];
             const width = window.innerWidth;
             const height = window.innerHeight;
             
-            // Add pulse animation to button
             button.style.setProperty('--color-rgb', getRGBFromColor(config.colors[0]));
             button.classList.add('button-pulse');
             setTimeout(() => button.classList.remove('button-pulse'), 600);
 
             for (let i = 0; i < count; i++) {
-                // Create DOM element
                 const el = document.createElement('div');
                 el.className = 'particle';
                 
-                // Create icon element
                 const iconEl = document.createElement('i');
                 const randomIcon = config.icons[Math.floor(Math.random() * config.icons.length)];
                 const randomColor = config.colors[Math.floor(Math.random() * config.colors.length)];
@@ -163,7 +154,6 @@
                 el.appendChild(iconEl);
                 container.appendChild(el);
 
-                // Particle logic object
                 const particle = {
                     element: el,
                     x: Math.random() * width,
@@ -197,16 +187,12 @@
                 const p = particles[i];
                 p.life++;
 
-                // Move upwards
                 p.y -= p.speed;
 
-                // Calculate sway
                 p.x = p.initialX + Math.sin(p.y * p.swayFrequency + p.swayPhase) * p.swayAmplitude;
                 
-                // Rotate
                 p.rotation += p.spin;
 
-                // Calculate opacity with smooth fade in/out
                 let opacity = 1;
                 const fadeInFrames = 10;
                 const fadeOutStart = p.maxLife - 20;
@@ -217,11 +203,9 @@
                     opacity = Math.max(0, (p.maxLife - p.life) / 20);
                 }
 
-                // Apply styles
                 p.element.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.rotation}deg) scale(${p.scale * opacity})`;
                 p.element.style.opacity = opacity;
 
-                // Remove when life expires
                 if (p.life >= p.maxLife) {
                     p.element.remove();
                     particles.splice(i, 1);
@@ -231,7 +215,6 @@
             requestAnimationFrame(updateParticles);
         }
 
-        // Start animation loop
         requestAnimationFrame(updateParticles);
     </script>
 </body>
